@@ -11,7 +11,5 @@ func OnMessage(session *discordgo.Session, message *discordgo.MessageCreate){
 		if err != nil{
 			log.Println(err)
 		}
-
-		log.Println(message.Content)
 	}
 }
