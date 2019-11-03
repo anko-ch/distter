@@ -2,12 +2,13 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"./lib/pingpong"
 	"github.com/bwmarrin/discordgo"
 )
 
-const token = "Bot ***"
+const token = os.Getenv("distter-token")
 
 var stopper = make(chan bool)
 
@@ -21,6 +22,7 @@ func main() {
 	packageHandlers := []interface{}{
 		pingpong.OnMessage,
 	}
+
 	for _, handler := range packageHandlers {
 		session.AddHandler(handler)
 	}
