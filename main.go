@@ -8,9 +8,10 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-const token = os.Getenv("DISTTER_TOKEN")
-
-var stopper = make(chan bool)
+var (
+	token   = "Bot " + os.Getenv("DISTTERBOT_TOKEN")
+	stopper = make(chan bool)
+)
 
 func main() {
 	session, err := discordgo.New()
