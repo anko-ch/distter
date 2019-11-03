@@ -8,7 +8,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-const token = os.Getenv("distter-token")
+const token = os.Getenv("DISTTER_TOKEN")
 
 var stopper = make(chan bool)
 
