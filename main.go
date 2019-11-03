@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"./lib/personalChannel"
 	"./lib/pingpong"
 	"github.com/bwmarrin/discordgo"
 )
@@ -22,6 +23,7 @@ func main() {
 
 	packageHandlers := []interface{}{
 		pingpong.OnMessage,
+		personalChannel.OnJoin,
 	}
 
 	for _, handler := range packageHandlers {
