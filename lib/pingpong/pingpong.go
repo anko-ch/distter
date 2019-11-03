@@ -1,14 +1,15 @@
 package pingpong
 
-import ( 
-	"github.com/bwmarrin/discordgo"
+import (
 	"log"
+
+	"github.com/bwmarrin/discordgo"
 )
 
-func OnMessage(session *discordgo.Session, message *discordgo.MessageCreate){
-	if message.Content == "ping"{
+func OnMessage(session *discordgo.Session, message *discordgo.MessageCreate) {
+	if message.Content == "ping" {
 		_, err := session.ChannelMessageSend(message.ChannelID, "pong")
-		if err != nil{
+		if err != nil {
 			log.Println(err)
 		}
 	}
