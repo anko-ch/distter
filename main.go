@@ -35,5 +35,6 @@ func main() {
 		log.Fatalln(err)
 	}
 	defer session.Close()
+	log.Println("running")
 	<-stopper
 }
