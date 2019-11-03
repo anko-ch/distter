@@ -6,36 +6,27 @@ import (
 	"log"
 )
 
-var (
-	token = "Bot ***"
-	stopBot = make(chan bool)
-	packageHandlers = []interface{}{
-		pingpong.OnMessage,
-	}
-)
+const token = "Bot ***"
+var stopper = make(chan bool)
 
 func main() {
 	session, err := discordgo.New()
-	session.Token = token
 	if err != nil{
 		log.Fatalln(err)
 	}
+	session.Token = token
 
+	packageHandlers := []interface{}{
+		pingpong.OnMessage,
+	}
 	for _, handler := range packageHandlers{
 		session.AddHandler(handler)
 	}
 
-	err = start(session)
+	err = session.Open()
 	if err != nil{
 		log.Fatalln(err)
 	}
-}
-
-func start(session *discordgo.Session)(error){
-	err := session.Open()
-	if err != nil{
-		return err
-	}
-	<- stopBot
-	return nil
+	defer session.Close()
+	<- stopper
 }
