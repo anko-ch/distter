@@ -8,25 +8,25 @@ import (
 
 const defaultRoleColor = 0xffffff
 
-func OnJoin(session *discordgo.Session, newMember *discordgo.GuildMemberAdd) {
+func OnJoin(session *discordgo.Session, newUser *discordgo.GuildMemberAdd) {
 
 	ReadWriteRole, err := GuildRoleCreateEdit(
 		session,
-		newMember.GuildID,
-		"ReadWrite:"+newMember.User.ID,
+		newUser.GuildID,
+		"ReadWrite:"+newUser.User.ID,
 	)
 
 	_, err = GuildRoleCreateEdit(
 		session,
-		newMember.GuildID,
-		"Read:"+newMember.User.ID,
+		newUser.GuildID,
+		"Read:"+newUser.User.ID,
 	)
 
-	err = session.GuildMemberRoleAdd(newMember.GuildID, newMember.User.ID, ReadWriteRole.ID)
+	err = session.GuildMemberRoleAdd(newUser.GuildID, newUser.User.ID, ReadWriteRole.ID)
 
 	_, err = session.GuildChannelCreate(
-		newMember.GuildID,
-		newMember.User.Username,
+		newUser.GuildID,
+		newUser.User.Username,
 		discordgo.ChannelTypeGuildText,
 	)
 
