@@ -2,8 +2,7 @@
 DistterはDiscordサーバーにtwitterのような機能を追加するBOTです。
 現在開発中。
 
-Distter add feature as twitter to Discord server.
-Distter is developping.
+Distter, the development of which is in progress, adds Twitter-like featured to your Discord servers.
 
 ## Required
 `go get github.com/bwmarrin/discordgo`
