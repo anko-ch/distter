@@ -16,7 +16,7 @@ func OnJoin(session *discordgo.Session, newMember *discordgo.GuildMemberAdd) {
 		"ReadWrite:"+newMember.User.ID,
 	)
 
-	ReadRole, err := GuildRoleCreateEdit(
+	_, err = GuildRoleCreateEdit(
 		session,
 		newMember.GuildID,
 		"Read:"+newMember.User.ID,
