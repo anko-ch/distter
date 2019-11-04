@@ -37,4 +37,6 @@ func main() {
 	defer session.Close()
 	log.Println("running")
 	<-stopper
+
+	log.Println("Stop")
 }
