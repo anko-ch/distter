@@ -10,16 +10,27 @@ const defaultRoleColor = 0xffffff
 
 func OnJoin(session *discordgo.Session, newUser *discordgo.GuildMemberAdd) {
 
+	readWriteRoleName := "ReadWrite:" + newUser.User.ID
+	readRoleName := "Read:" + newUser.User.ID
+	roles, err := session.GuildRoles(newUser.GuildID)
+
+	// 重複してた場合処理を中断する
+	for _, role := range roles {
+		if role.Name == readWriteRoleName {
+			return
+		}
+	}
+
 	ReadWriteRole, err := GuildRoleCreateEdit(
 		session,
 		newUser.GuildID,
-		"ReadWrite:"+newUser.User.ID,
+		readWriteRoleName,
 	)
 
 	_, err = GuildRoleCreateEdit(
 		session,
 		newUser.GuildID,
-		"Read:"+newUser.User.ID,
+		readRoleName,
 	)
 
 	err = session.GuildMemberRoleAdd(newUser.GuildID, newUser.User.ID, ReadWriteRole.ID)
